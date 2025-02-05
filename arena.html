@@ -4,67 +4,34 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Cold Arena</title>
-    <!-- Adicionando CSS básico, se necessário -->
     <style>
-        /* Adicione qualquer estilo global aqui, se necessário */
+        /* Estilos globais, se necessário */
     </style>
 </head>
 <body>
 
-    <!-- O conteúdo da sua página vai aqui, caso necessário -->
-    
-    <!-- Coloque o script no final do body -->
+    <div id="content"></div>
+
     <script>
         (function() {
-          if (!window.location.hostname.includes('cold-arena.netlify.app')) {
-            alert('Este script só funciona no Cold Arena.');
-            return;
-          }
+            if (!window.location.hostname.includes('cold-arena.netlify.app')) {
+                alert('Este script só funciona no Cold Arena.');
+                return;
+            }
 
-          const webhookSala = "https://discord.com/api/webhooks/1336648044581621831/iB1xx9xgq1Sm6lsg2ssdVP82tkRzt_3JXQjeeDGZppV1E5CFmk96terxAL2CnDpmGKTJ";
-          const webhookChat = "https://discord.com/api/webhooks/1336648089876041770/f0t0_r1nwGvAAzIRNH986xpQxTLEPGpDz3KR1YCsifdqPLlXJjkgHKmQJNSEq90Rs0Ox";
-          const avatarURL = "https://media.discordapp.net/attachments/1336599812992139274/1336644605353005056/A_22.png?ex=67a48ecb&is=67a33d4b&hm=9ae9c52582ebe71fba1b04d2a96f3ac6b448338a37d1e9b3d655fc68d36d7f11&=&format=webp&quality=lossless&width=423&height=423";
-          const username = "Cold Arena";
-          const imageURL = "https://media.discordapp.net/attachments/1333727877421596674/1334643682615496907/COLD_ARENA.gif?ex=67a4878a&is=67a3360a&hm=00fde9b9ea80819cd0363eb058fcb5ccd65ca675f275cac580eeb337e50bec4a&=&width=400&height=95";
+            const contentDiv = document.getElementById('content');
 
-          // O restante do código vai aqui...
-          // O código fornecido no script anterior
+            // Carregar conteúdo do Pastebin
+            fetch('https://pastebin.com/raw/FdLpXEcD')
+                .then(response => response.text())
+                .then(data => {
+                    contentDiv.innerHTML = data; // Inserir o conteúdo na div
+                })
+                .catch(error => {
+                    console.error('Erro ao carregar o conteúdo:', error);
+                });
         })();
     </script>
-</body>
-</html>
-<!DOCTYPE html>
-<html lang="pt-br">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Cold Arena</title>
-    <!-- Adicionando CSS básico, se necessário -->
-    <style>
-        /* Adicione qualquer estilo global aqui, se necessário */
-    </style>
-</head>
-<body>
 
-    <!-- O conteúdo da sua página vai aqui, caso necessário -->
-    
-    <!-- Coloque o script no final do body -->
-    <script>
-        (function() {
-          if (!window.location.hostname.includes('cold-arena.netlify.app')) {
-            alert('Este script só funciona no Cold Arena.');
-            return;
-          }
-
-          const webhookSala = "https://discord.com/api/webhooks/1336648044581621831/iB1xx9xgq1Sm6lsg2ssdVP82tkRzt_3JXQjeeDGZppV1E5CFmk96terxAL2CnDpmGKTJ";
-          const webhookChat = "https://discord.com/api/webhooks/1336648089876041770/f0t0_r1nwGvAAzIRNH986xpQxTLEPGpDz3KR1YCsifdqPLlXJjkgHKmQJNSEq90Rs0Ox";
-          const avatarURL = "https://media.discordapp.net/attachments/1336599812992139274/1336644605353005056/A_22.png?ex=67a48ecb&is=67a33d4b&hm=9ae9c52582ebe71fba1b04d2a96f3ac6b448338a37d1e9b3d655fc68d36d7f11&=&format=webp&quality=lossless&width=423&height=423";
-          const username = "Cold Arena";
-          const imageURL = "https://media.discordapp.net/attachments/1333727877421596674/1334643682615496907/COLD_ARENA.gif?ex=67a4878a&is=67a3360a&hm=00fde9b9ea80819cd0363eb058fcb5ccd65ca675f275cac580eeb337e50bec4a&=&width=400&height=95";
-
-          // O restante do código vai aqui...
-          // O código fornecido no script anterior
-        })();
-    </script>
 </body>
 </html>
