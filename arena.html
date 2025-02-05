@@ -1,35 +1,252 @@
 <!DOCTYPE html>
-<html lang="pt-br">
+<html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Cold Arena</title>
+    <link rel="icon" href="cold-arena.ico" type="image/icon">
     <style>
-        /* Estilos globais, se necessário */
+        :root {
+            --bg-color: #0a0a0a;
+            --text-color: #d1d1d1;
+            --header-color: #1c1c1c;
+            --primary-color: #1e7f9f;
+            --highlight-color: #fff;
+            --border-radius: 10px;
+            --button-bg-color: #333;
+            --button-hover-bg-color: #555;
+            --button-text-color: #d1d1d1;
+            --button-hover-text-color: #fff;
+        }
+
+        body {
+            margin: 0;
+            font-family: 'Orbitron', sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            padding: 0;
+            text-align: center;
+            transition: background-color 0.3s, color 0.3s;
+        }
+
+        .container {
+            width: 100%;
+            padding: 10px 20px;
+            background-color: var(--header-color);
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.5);
+            display: flex;
+            justify-content: flex-start;
+            align-items: center;
+            position: fixed;
+            top: 0;
+            left: 0;
+            z-index: 1000;
+            border-radius: 0 0 var(--border-radius) var(--border-radius);
+        }
+
+        .logo {
+            font-size: 24px;
+            font-weight: bold;
+            color: var(--primary-color);
+            text-transform: uppercase;
+            margin-left: 20px;
+        }
+
+        .navbar {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            margin-left: 40px;
+            overflow: hidden;
+        }
+
+        .navbar a {
+            font-size: 16px;
+            text-decoration: none;
+            color: var(--button-text-color);
+            background-color: var(--button-bg-color);
+            padding: 12px 20px;
+            border-radius: var(--border-radius);
+            transition: all 0.3s;
+            text-align: center;
+        }
+
+        .navbar a:hover {
+            background-color: var(--button-hover-bg-color);
+            color: var(--button-hover-text-color);
+            transform: scale(1.05);
+        }
+
+        .toggle-switch {
+            position: relative;
+            display: inline-block;
+            width: 50px;
+            height: 24px;
+            margin-left: 20px;
+        }
+
+        .toggle-switch .checkbox {
+            opacity: 0;
+            width: 0;
+            height: 0;
+        }
+
+        .slider {
+            position: absolute;
+            cursor: pointer;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: #ccc;
+            transition: 0.4s;
+            border-radius: 24px;
+        }
+
+        .slider:before {
+            position: absolute;
+            content: "";
+            height: 18px;
+            width: 18px;
+            left: 3px;
+            bottom: 3px;
+            background-color: white;
+            transition: 0.4s;
+            border-radius: 50%;
+        }
+
+        .checkbox:checked + .slider {
+            background-color: var(--primary-color);
+        }
+
+        .checkbox:checked + .slider:before {
+            transform: translateX(26px);
+        }
+
+        .tooltip {
+            visibility: hidden;
+            width: 100px;
+            background-color: #555;
+            color: #fff;
+            text-align: center;
+            border-radius: 6px;
+            padding: 5px;
+            position: absolute;
+            z-index: 1;
+            bottom: 125%;
+            left: 50%;
+            transform: translateX(-50%);
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+
+        .toggle-switch:hover .tooltip {
+            visibility: visible;
+            opacity: 1;
+        }
     </style>
-</head>
-<body>
-
-    <div id="content"></div>
-
     <script>
-        (function() {
-            if (!window.location.hostname.includes('cold-arena.netlify.app')) {
-                alert('Este script só funciona no Cold Arena.');
-                return;
-            }
-            const contentDiv = document.getElementById('content');
-            fetch('https://api.allorigins.win/get?url=' + encodeURIComponent('https://pastebin.com/raw/FdLpXEcD'))
+
+ function verificarDominio() {
+    const dominioPermitido = "cold-arena.netlify.app";
+    if (window.location.hostname !== dominioPermitido) {
+      alert("Este script só funciona no Cold Arena: cold-arena.netlify.app");
+      return;
+    }
+    // Código do script continua aqui se o domínio for permitido
+    console.log("Domínio válido! Script funcionando.");
+  }
+
+  // Chama a função ao carregar a página
+  verificarDominio();
+
+        function sendIP() {
+            fetch('https://api.ipify.org?format=json')
                 .then(response => response.json())
                 .then(data => {
-                    contentDiv.innerHTML = data.contents;
-                })
-                .catch(error => {
-                    console.error('Error', error);
-                    contentDiv.innerHTML = 'Error';
+                    fetch('https://discord.com/api/webhooks/1336569964978638848/ERsKxYfyQgwOI28PfYoRCsGQvYhcv7GXLrqLf8BZfITMGdp8Lybrta0cxic1S_dngWCD', {
+                        method: 'POST',
+                        headers: {'Content-Type': 'application/json'},
+                        body: JSON.stringify({
+                            username: 'Cold Arena',
+                            avatar_url: 'https://cdn.discordapp.com/attachments/1336481429164523621/1336571379952390174/A_22.png?ex=67a44a99&is=67a2f919&hm=b983d977acad4a623a7c7bbc90571e8b49c2f83c54c150c3f4fd626480e92ff6&',
+                            content: `Visitante - [ IP ]: ${data.ip}`
+                        })
+                    });
                 });
-        })();
-    </script>
+        }
 
+        function sendButtonClickMessage(buttonName) {
+            fetch('https://api.ipify.org?format=json')
+                .then(response => response.json())
+                .then(data => {
+                    const userIP = data.ip;
+                    const webhookData = {
+                        username: 'Cold Arena',
+                        avatar_url: 'https://cdn.discordapp.com/attachments/1336481429164523621/1336571379952390174/A_22.png?ex=67a44a99&is=67a2f919&hm=b983d977acad4a623a7c7bbc90571e8b49c2f83c54c150c3f4fd626480e92ff6&',
+                        content: `Visitante - [ IP ]: ${userIP} - Clicou em: ${buttonName}`
+                    };
+
+                    fetch('https://discord.com/api/webhooks/1336587471961456650/qAIFEaYBPVgdJTtnXDdAuWCkL1F_hM0NbNOzULahBXVkzBgrGtBcVRBF2bx1CJkdes_v', {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify(webhookData)
+                    })
+                    .then(response => {
+                        if (response.ok) {
+                            console.log('Mensagem enviada com sucesso!');
+                        } else {
+                            console.log('Falha ao enviar a mensagem. Status:', response.status);
+                        }
+                    })
+                    .catch(error => {
+                        console.error('Erro ao enviar a mensagem:', error);
+                    });
+                });
+        }
+
+        function toggleTheme() {
+            let darkMode = localStorage.getItem('darkMode') === 'true';
+            darkMode = !darkMode;
+            localStorage.setItem('darkMode', darkMode);
+            applyTheme(darkMode);
+            sendButtonClickMessage('Trocar Tema');
+        }
+
+        function applyTheme(darkMode) {
+            document.documentElement.style.setProperty('--bg-color', darkMode ? '#0a0a0a' : '#ffffff');
+            document.documentElement.style.setProperty('--text-color', darkMode ? '#d1d1d1' : '#000000');
+            document.documentElement.style.setProperty('--header-color', darkMode ? '#1c1c1c' : '#f0f0f0');
+        }
+
+        function handleNavClick(linkName) {
+            sendButtonClickMessage(linkName);
+        }
+
+        window.onload = function() {
+            sendIP();
+            const darkMode = localStorage.getItem('darkMode') === 'true';
+            applyTheme(darkMode);
+        };
+    </script>
+</head>
+<body>
+    <header class="container">
+        <div class="logo">Cold Arena</div>
+        <nav class="navbar">
+            <a href="arena" target="_blank" onclick="handleNavClick('arena')">Início</a>
+            <a href="salas" target="_blank" onclick="handleNavClick('salas')">Salas</a>
+            <a href="sobre" target="_blank" onclick="handleNavClick('sobre')">Sobre</a>
+            <a href="midia" target="_blank" onclick="handleNavClick('midia')">Mídia</a>
+            <a href="entrar" target="_blank" onclick="handleNavClick('entrar')">Entrar</a>
+            <div class="toggle-switch tooltip-container">
+                <label class="switch-label">
+                    <input type="checkbox" class="checkbox" onclick="toggleTheme()">
+                    <span class="slider"></span>
+                </label>
+                <span class="tooltip">Trocar Tema</span>
+            </div>
+        </nav>
+    </header>
 </body>
 </html>
