@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cold Arena</title>
+    <link rel="icon" href="cold-arena.ico" type="image/icon">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background: linear-gradient(45deg, #0a0a0a, #1b1b1b);
+            font-family: 'Arial', sans-serif;
+            color: #fff;
+            overflow: hidden;
+            position: relative;
+        }
+        .loading-container {
+            text-align: center;
+            animation: fadeIn 2s ease-out;
+        }
+        .loading-text {
+            font-size: 4rem;
+            font-weight: bold;
+            letter-spacing: 5px;
+            margin-bottom: 30px;
+            color: #fff;
+            text-transform: uppercase;
+            animation: textGlow 1.5s infinite alternate;
+        }
+        @keyframes textGlow {
+            0% {
+                text-shadow: 0 0 10px #fff, 0 0 20px #fff, 0 0 30px #fff;
+            }
+            100% {
+                text-shadow: 0 0 20px #fff, 0 0 40px #fff, 0 0 60px #fff;
+            }
+        }
+        @keyframes fadeIn {
+            0% {
+                opacity: 0;
+                transform: translateY(-50px);
+            }
+            100% {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        /* Efeito de chuva */
+        .raindrop {
+            position: absolute;
+            top: -20px;
+            width: 2px;
+            height: 20px;
+            background: rgba(255, 255, 255, 0.5);
+            animation: fall 1.5s linear infinite;
+        }
+        @keyframes fall {
+            to {
+                transform: translateY(100vh);
+            }
+        }
+        /* Variando o tempo de animação e posição das gotas */
+        .raindrop:nth-child(1) {
+            left: 10%;
+            animation-duration: 2s;
+        }
+        .raindrop:nth-child(2) {
+            left: 20%;
+            animation-duration: 2.5s;
+        }
+        .raindrop:nth-child(3) {
+            left: 30%;
+            animation-duration: 2.7s;
+        }
+        .raindrop:nth-child(4) {
+            left: 40%;
+            animation-duration: 3s;
+        }
+        .raindrop:nth-child(5) {
+            left: 50%;
+            animation-duration: 2.2s;
+        }
+        .raindrop:nth-child(6) {
+            left: 60%;
+            animation-duration: 2.5s;
+        }
+        .raindrop:nth-child(7) {
+            left: 70%;
+            animation-duration: 3.2s;
+        }
+        .raindrop:nth-child(8) {
+            left: 80%;
+            animation-duration: 2.8s;
+        }
+        .raindrop:nth-child(9) {
+            left: 90%;
+            animation-duration: 2.3s;
+        }
+    </style>
+    <script>
+        setTimeout(function() {
+            window.location.href = "entrar";
+        }, 5000); // 5 segundos
+    </script>
+</head>
+<body>
+    <!-- Criando as gotas de chuva -->
+    <div class="raindrop"></div>
+    <div class="raindrop"></div>
+    <div class="raindrop"></div>
+    <div class="raindrop"></div>
+    <div class="raindrop"></div>
+    <div class="raindrop"></div>
+    <div class="raindrop"></div>
+    <div class="raindrop"></div>
+    <div class="raindrop"></div>
+
+    <div class="loading-container">
+        <div class="loading-text">Cold Arena</div>
+    </div>
+</body>
+</html>
