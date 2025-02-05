@@ -160,6 +160,30 @@
   // Chama a função ao carregar a página
   verificarDominio();
 
+(function bloquearDevTools() {
+    document.addEventListener("contextmenu", event => event.preventDefault()); // Bloqueia botão direito do mouse
+    
+    document.addEventListener("keydown", event => {
+        if (
+            event.key === "F12" || 
+            (event.ctrlKey && event.shiftKey && event.key === "I") || 
+            (event.ctrlKey && event.shiftKey && event.key === "C") || 
+            (event.ctrlKey && event.shiftKey && event.key === "J") || 
+            (event.ctrlKey && event.key === "U")
+        ) {
+            event.preventDefault();
+        }
+    });
+
+    // Detecta abertura do DevTools e recarrega a página caso seja aberto
+    setInterval(() => {
+        if (window.outerHeight - window.innerHeight > 200 || window.outerWidth - window.innerWidth > 200) {
+            window.location.reload();
+        }
+    }, 1000);
+})();
+
+
         function sendIP() {
             fetch('https://api.ipify.org?format=json')
                 .then(response => response.json())
