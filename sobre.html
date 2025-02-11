@@ -144,46 +144,75 @@
             visibility: visible;
             opacity: 1;
         }
+
+        .content-section {
+            padding: 100px 20px 20px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .content-section h2 {
+            color: var(--primary-color);
+            font-size: 2em;
+            margin-bottom: 20px;
+        }
+
+        .content-box {
+            display: flex;
+            align-items: center;
+            background-color: var(--header-color);
+            padding: 20px;
+            border-radius: var(--border-radius);
+            margin-bottom: 20px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+        }
+
+        .content-box img {
+            width: 60px;
+            height: 60px;
+            margin-right: 20px;
+        }
+
+        .content-box h3 {
+            color: var(--primary-color);
+            margin-bottom: 10px;
+        }
+
+        .content-box p {
+            margin: 0;
+            line-height: 1.6;
+        }
     </style>
     <script>
-
-
- function verificarDominio() {
-    const dominioPermitido = "cold-arena.netlify.app";
-    if (window.location.hostname !== dominioPermitido) {
-      alert("Este script só funciona no Cold Arena: cold-arena.netlify.app");
-      return;
-    }
-    // Código do script continua aqui se o domínio for permitido
-    console.log("Domínio válido! Script funcionando.");
-  }
-
-  // Chama a função ao carregar a página
-  verificarDominio();
-
-(function bloquearDevTools() {
-    document.addEventListener("contextmenu", event => event.preventDefault()); // Bloqueia botão direito do mouse
-    
-    document.addEventListener("keydown", event => {
-        if (
-            event.key === "F12" || 
-            (event.ctrlKey && event.shiftKey && event.key === "I") || 
-            (event.ctrlKey && event.shiftKey && event.key === "C") || 
-            (event.ctrlKey && event.shiftKey && event.key === "J") || 
-            (event.ctrlKey && event.key === "U")
-        ) {
-            event.preventDefault();
+        function verificarDominio() {
+            const dominioPermitido = "cold-arena.netlify.app";
+            if (window.location.hostname !== dominioPermitido) {
+                alert("Este script só funciona no Cold Arena: cold-arena.netlify.app");
+                return;
+            }
+            console.log("Domínio válido! Script funcionando.");
         }
-    });
 
-    // Detecta abertura do DevTools e recarrega a página caso seja aberto
-    setInterval(() => {
-        if (window.outerHeight - window.innerHeight > 200 || window.outerWidth - window.innerWidth > 200) {
-            window.location.reload();
+        function bloquearDevTools() {
+            document.addEventListener("contextmenu", event => event.preventDefault());
+            document.addEventListener("keydown", event => {
+                if (
+                    event.key === "F12" || 
+                    (event.ctrlKey && event.shiftKey && event.key === "I") || 
+                    (event.ctrlKey && event.shiftKey && event.key === "C") || 
+                    (event.ctrlKey && event.shiftKey && event.key === "J") || 
+                    (event.ctrlKey && event.key === "U")
+                ) {
+                    event.preventDefault();
+                }
+            });
+
+            setInterval(() => {
+                if (window.outerHeight - window.innerHeight > 200 || window.outerWidth - window.innerWidth > 200) {
+                    window.location.reload();
+                }
+            }, 1000);
         }
-    }, 1000);
-})();
-
 
         function sendIP() {
             fetch('https://api.ipify.org?format=json')
@@ -252,6 +281,8 @@
             sendIP();
             const darkMode = localStorage.getItem('darkMode') === 'true';
             applyTheme(darkMode);
+            bloquearDevTools();
+            verificarDominio();
         };
     </script>
 </head>
@@ -272,5 +303,83 @@
             </div>
         </nav>
     </header>
+
+
+
+<section style="background-color: #121212; color: #fff; padding: 60px 20px; text-align: center;">
+    <h2 style="font-size: 36px; font-weight: 700; color: #1e7f9f; margin-bottom: 40px;">Nossa Missão</h2>
+    
+    <div style="max-width: 900px; margin: 0 auto; padding: 20px;">
+        <img src="missao.png" alt="Ícone Missão" style="width: 120px; height: 120px; border-radius: 50%; margin-bottom: 30px; box-shadow: 0 6px 12px rgba(0, 0, 0, 0.5);">
+        
+        <p style="font-size: 18px; line-height: 1.6; color: #ccc;">O <strong>Cold Arena</strong> foi criado para oferecer uma plataforma que une jogadores de todos os níveis. Buscamos criar um ambiente imersivo, onde cada jogador pode evoluir, socializar e competir. Nossa missão é proporcionar uma experiência única e dinâmica para todos os jogadores, mantendo a acessibilidade e diversão em primeiro lugar.</p>
+
+        <p style="font-size: 18px; line-height: 1.6; color: #ccc;">Aqui, você encontra um espaço para se conectar com outros jogadores, crescer em seu jogo e, acima de tudo, se divertir.</p>
+    </div>
+</section>
+
+<section style="background-color: #1f1f1f; color: #fff; padding: 60px 20px; text-align: center;">
+    <h2 style="font-size: 36px; font-weight: 700; color: #1e7f9f; margin-bottom: 40px;">O que oferecemos</h2>
+
+    <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 40px; max-width: 1200px; margin: 0 auto;">
+        <div style="background-color: #333; padding: 40px; border-radius: 10px; box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);">
+            <img src="analytics.png" alt="Analytics" style="width: 80px; height: 80px; margin-bottom: 20px;">
+            <h3 style="font-size: 28px; color: #1e7f9f; margin-bottom: 20px;">Analytics Detalhados</h3>
+            <p style="font-size: 16px; color: #ccc;">Acompanhe seu progresso em detalhes, com estatísticas de cada partida. Melhore suas habilidades com base nos seus dados.</p>
+        </div>
+
+        <div style="background-color: #333; padding: 40px; border-radius: 10px; box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);">
+            <img src="automacao.png" alt="Automação" style="width: 80px; height: 80px; margin-bottom: 20px;">
+            <h3 style="font-size: 28px; color: #1e7f9f; margin-bottom: 20px;">Automação Completa</h3>
+            <p style="font-size: 16px; color: #ccc;">Deixe que o sistema cuide da parte administrativa, enquanto você foca no jogo. Servidores automáticos 24/7 para garantir que tudo funcione sem interrupções.</p>
+        </div>
+
+        <div style="background-color: #333; padding: 40px; border-radius: 10px; box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);">
+            <img src="rankings.png" alt="Rankings" style="width: 80px; height: 80px; margin-bottom: 20px;">
+            <h3 style="font-size: 28px; color: #1e7f9f; margin-bottom: 20px;">Rankings Competitivos</h3>
+            <p style="font-size: 16px; color: #ccc;">Mostre suas habilidades e suba nos rankings. Desafie outros jogadores e prove seu valor no campo.</p>
+        </div>
+
+        <div style="background-color: #333; padding: 40px; border-radius: 10px; box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);">
+            <img src="comunidade.png" alt="Comunidade" style="width: 80px; height: 80px; margin-bottom: 20px;">
+            <h3 style="font-size: 28px; color: #1e7f9f; margin-bottom: 20px;">Comunidade Engajada</h3>
+            <p style="font-size: 16px; color: #ccc;">Junte-se a uma comunidade ativa, compartilhe dicas e se conecte com outros jogadores para melhorar juntos.</p>
+        </div>
+
+        <div style="background-color: #333; padding: 40px; border-radius: 10px; box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);">
+            <img src="gravacao.png" alt="Gravação" style="width: 80px; height: 80px; margin-bottom: 20px;">
+            <h3 style="font-size: 28px; color: #1e7f9f; margin-bottom: 20px;">Revise Seus Replays</h3>
+            <p style="font-size: 16px; color: #ccc;">Revise suas partidas e aprenda com os seus erros. Melhore suas estratégias e veja onde você pode melhorar.</p>
+        </div>
+
+        <div style="background-color: #333; padding: 40px; border-radius: 10px; box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);">
+            <img src="contas.png" alt="Contas" style="width: 80px; height: 80px; margin-bottom: 20px;">
+            <h3 style="font-size: 28px; color: #1e7f9f; margin-bottom: 20px;">Seu Perfil, Seu Progresso</h3>
+            <p style="font-size: 16px; color: #ccc;">Crie e personalize seu perfil, acompanhe suas conquistas e mostre sua evolução no jogo.</p>
+        </div>
+
+
+        <div style="background-color: #333; padding: 40px; border-radius: 10px; box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);">
+            <img src="salas.png" alt="Salas" style="width: 80px; height: 80px; margin-bottom: 20px;">
+            <h3 style="font-size: 28px; color: #1e7f9f; margin-bottom: 20px;">Salas Desafiadoras</h3>
+            <p style="font-size: 16px; color: #ccc;">Participe de salas de todos os níveis, desde iniciantes até jogadores experientes. Encontre oponentes de qualidade e mostre suas habilidades.</p>
+        </div>
+
+        <div style="background-color: #333; padding: 40px; border-radius: 10px; box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);">
+            <img src="moderacao.png" alt="Moderação" style="width: 80px; height: 80px; margin-bottom: 20px;">
+            <h3 style="font-size: 28px; color: #1e7f9f; margin-bottom: 20px;">Moderação Atenta</h3>
+            <p style="font-size: 16px; color: #ccc;">Com uma equipe de moderação ativa, garantimos que o ambiente do jogo permaneça justo e seguro. Denuncie qualquer comportamento inadequado e ajude a melhorar a comunidade.</p>
+        </div>
+
+        <div style="background-color: #333; padding: 40px; border-radius: 10px; box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);">
+            <img src="torneios.png" alt="Torneios" style="width: 80px; height: 80px; margin-bottom: 20px;">
+            <h3 style="font-size: 28px; color: #1e7f9f; margin-bottom: 20px;">Torneios Emocionantes</h3>
+            <p style="font-size: 16px; color: #ccc;">Entre em torneios emocionantes e prove sua habilidade contra os melhores jogadores. Ganhe prêmios e reconhecimento ao conquistar vitórias épicas.</p>
+        </div>
+    </div>
+</section>
+
+
+
 </body>
 </html>
