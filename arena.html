@@ -5,146 +5,266 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Cold Arena</title>
     <link rel="icon" href="cold-arena.ico" type="image/icon">
-    <style>
-        :root {
-            --bg-color: #0a0a0a;
-            --text-color: #d1d1d1;
-            --header-color: #1c1c1c;
-            --primary-color: #1e7f9f;
-            --highlight-color: #fff;
-            --border-radius: 10px;
-            --button-bg-color: #333;
-            --button-hover-bg-color: #555;
-            --button-text-color: #d1d1d1;
-            --button-hover-text-color: #fff;
-        }
+  <!-- Bootstrap CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  
+  <style>
+    :root {
+      --bg-color: #0a0a0a;
+      --text-color: #d1d1d1;
+      --header-color: #1c1c1c;
+      --primary-color: #1e7f9f;
+      --highlight-color: #fff;
+      --border-radius: 10px;
+      --button-bg-color: #333;
+      --button-hover-bg-color: #555;
+      --button-text-color: #d1d1d1;
+      --button-hover-text-color: #fff;
+    }
 
-        body {
-            margin: 0;
-            font-family: 'Orbitron', sans-serif;
-            background-color: var(--bg-color);
-            color: var(--text-color);
-            padding: 0;
-            text-align: center;
-            transition: background-color 0.3s, color 0.3s;
-        }
+    /* Ajusta o padding do body para não ficar escondido atrás do navbar fixo */
+body {
+  margin: 0;
+  padding-top: 80px;
+  font-family: 'Orbitron', sans-serif;
+  color: var(--text-color);
+  transition: background-color 0.3s, color 0.3s;
+  text-align: center;
+  background-size: cover; /* Ajusta a imagem para cobrir a tela toda */
+  background-position: center; /* Centraliza a imagem */
+  background-attachment: fixed; /* Imagem fixa durante rolagem */
+  height: 100vh; /* Garante que a imagem ocupe toda a altura da tela */
+}
 
-        .container {
-            width: 100%;
-            padding: 10px 20px;
-            background-color: var(--header-color);
-            box-shadow: 0 0 15px rgba(0, 0, 0, 0.5);
-            display: flex;
-            justify-content: flex-start;
-            align-items: center;
-            position: fixed;
-            top: 0;
-            left: 0;
-            z-index: 1000;
-            border-radius: 0 0 var(--border-radius) var(--border-radius);
-        }
+    /* Personalizações para o navbar */
+    .navbar {
+      background-color: var(--header-color);
+      box-shadow: 0 0 15px rgba(0, 0, 0, 0.5);
+      border-radius: 0 0 var(--border-radius) var(--border-radius);
+    }
 
-        .logo {
-            font-size: 24px;
-            font-weight: bold;
-            color: var(--primary-color);
-            text-transform: uppercase;
-            margin-left: 20px;
-        }
+    .navbar-brand {
+      font-size: 24px;
+      font-weight: bold;
+      color: var(--primary-color) !important;
+      text-transform: uppercase;
+      margin-left: 20px;
+    }
 
-        .navbar {
-            display: flex;
-            align-items: center;
-            gap: 20px;
-            margin-left: 40px;
-            overflow: hidden;
-        }
+    .nav-link {
+      font-size: 16px;
+      color: var(--button-text-color) !important;
+      background-color: var(--button-bg-color);
+      padding: 12px 20px;
+      border-radius: var(--border-radius);
+      transition: all 0.3s;
+      text-align: center;
+      margin: 5px;
+    }
 
-        .navbar a {
-            font-size: 16px;
-            text-decoration: none;
-            color: var(--button-text-color);
-            background-color: var(--button-bg-color);
-            padding: 12px 20px;
-            border-radius: var(--border-radius);
-            transition: all 0.3s;
-            text-align: center;
-        }
+    .nav-link:hover {
+      background-color: var(--button-hover-bg-color) !important;
+      color: var(--button-hover-text-color) !important;
+      transform: scale(1.05);
+    }
+  h1 {
+    font-size: 3rem;
+    font-weight: 700;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    text-shadow: 4px 4px 10px rgba(0, 0, 0, 0.6);
+  }
 
-        .navbar a:hover {
-            background-color: var(--button-hover-bg-color);
-            color: var(--button-hover-text-color);
-            transform: scale(1.05);
-        }
+  p {
+    font-size: 1.2rem;
+    color: #b0b0b0;
+  }
 
-        .toggle-switch {
-            position: relative;
-            display: inline-block;
-            width: 50px;
-            height: 24px;
-            margin-left: 20px;
-        }
+  .btn-custom {
+    display: inline-flex;
+    align-items: center;
+    padding: 14px 28px;
+    font-size: 18px;
+    font-weight: 600;
+    background-color: #2e2e2e;
+    border: 2px solid #2e2e2e;
+    color: white;
+    border-radius: 50px;
+    transition: all 0.3s ease-in-out;
+    box-shadow: 0 8px 15px rgba(0, 0, 0, 0.3);
+    margin: 15px;
+    text-transform: uppercase;
+  }
 
-        .toggle-switch .checkbox {
-            opacity: 0;
-            width: 0;
-            height: 0;
-        }
+  .btn-custom:hover {
+    background-color: #f1faee;
+    border-color: #f1faee;
+    color: #2e2e2e;
+    transform: translateY(-5px);
+    box-shadow: 0 15px 25px rgba(0, 0, 0, 0.4);
+  }
 
-        .slider {
-            position: absolute;
-            cursor: pointer;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background-color: #ccc;
-            transition: 0.4s;
-            border-radius: 24px;
-        }
+  .btn-icon {
+    width: 24px;
+    height: 24px;
+    margin-right: 10px;
+    transition: transform 0.3s ease;
+  }
 
-        .slider:before {
-            position: absolute;
-            content: "";
-            height: 18px;
-            width: 18px;
-            left: 3px;
-            bottom: 3px;
-            background-color: white;
-            transition: 0.4s;
-            border-radius: 50%;
-        }
+  .btn-text {
+    text-transform: uppercase;
+    font-weight: 600;
+    letter-spacing: 1px;
+  }
 
-        .checkbox:checked + .slider {
-            background-color: var(--primary-color);
-        }
+  .btn-custom:hover .btn-icon {
+    transform: rotate(360deg);
+  }
 
-        .checkbox:checked + .slider:before {
-            transform: translateX(26px);
-        }
+  .container {
+    color: white;
+    text-align: center;
+  }
 
-        .tooltip {
-            visibility: hidden;
-            width: 100px;
-            background-color: #555;
-            color: #fff;
-            text-align: center;
-            border-radius: 6px;
-            padding: 5px;
-            position: absolute;
-            z-index: 1;
-            bottom: 125%;
-            left: 50%;
-            transform: translateX(-50%);
-            opacity: 0;
-            transition: opacity 0.3s;
-        }
+  .mt-4 {
+    margin-top: 50px;
+  }
 
-        .toggle-switch:hover .tooltip {
-            visibility: visible;
-            opacity: 1;
-        }
-    </style>
+  .mt-5 {
+    margin-top: 80px;
+  }
+/* Estilização premium para o botão "Entrar" */
+.btn-entrar {
+  background-color: #1e7f9f; /* Cor sólida elegante */
+  color: #fff;
+  font-weight: 600;
+  border: 2px solid transparent; /* Borda invisível para criar o efeito de brilho */
+  border-radius: 30px; /* Bordas arredondadas elegantes */
+  padding: 14px 40px; /* Mais espaçamento interno */
+  font-size: 16px; /* Fonte otimizada */
+  letter-spacing: 1px;
+  text-transform: uppercase; /* Maiúsculas */
+  transition: all 0.3s ease-in-out; /* Transição suave para todos os efeitos */
+  position: relative; /* Necessário para o efeito de brilho */
+  cursor: pointer;
+  outline: none; /* Remove contorno padrão */
+}
+
+.btn-entrar::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(45deg, #1e7f9f, #e63337);
+  border-radius: 30px;
+  opacity: 0; /* Inicia invisível */
+  transition: all 0.3s ease-in-out; /* Suavizar a transição */
+  z-index: -1; /* Coloca o brilho atrás do botão */
+}
+
+.btn-entrar:hover {
+  background-color: #e63337; /* Escurece a cor ao passar o mouse */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3); /* Sombra suave ao passar o mouse */
+}
+
+.btn-entrar:hover::before {
+  opacity: 1; /* Brilho aparece no hover */
+  transform: scale(1.1); /* Efeito de expansão suave */
+}
+
+.btn-entrar:active {
+  background-color: #d1281f; /* Escurece mais ao clicar */
+  transform: scale(0.98); /* Diminui ligeiramente ao clicar */
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2); /* Sombra reduzida ao clicar */
+}
+
+
+    /* Estilização do toggle de tema */
+    .toggle-switch {
+      position: relative;
+      display: inline-block;
+      width: 50px;
+      height: 24px;
+      margin-left: 20px;
+    }
+
+    .toggle-switch .checkbox {
+      opacity: 0;
+      width: 0;
+      height: 0;
+    }
+
+    .slider {
+      position: absolute;
+      cursor: pointer;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background-color: #ccc;
+      transition: 0.4s;
+      border-radius: 24px;
+    }
+
+    .slider:before {
+      position: absolute;
+      content: "";
+      height: 18px;
+      width: 18px;
+      left: 3px;
+      bottom: 3px;
+      background-color: white;
+      transition: 0.4s;
+      border-radius: 50%;
+    }
+
+    .checkbox:checked + .slider {
+      background-color: var(--primary-color);
+    }
+
+    .checkbox:checked + .slider:before {
+      transform: translateX(26px);
+    }
+
+    .tooltip {
+      visibility: hidden;
+      width: 100px;
+      background-color: #555;
+      color: #fff;
+      text-align: center;
+      border-radius: 6px;
+      padding: 5px;
+      position: absolute;
+      z-index: 1;
+      bottom: 125%;
+      left: 50%;
+      transform: translateX(-50%);
+      opacity: 0;
+      transition: opacity 0.3s;
+    }
+
+    .toggle-switch:hover .tooltip {
+      visibility: visible;
+      opacity: 1;
+    }
+
+    /* Personalização do ícone do botão de toggle do Bootstrap */
+    .navbar-toggler {
+      border-color: var(--button-text-color);
+    }
+    .navbar-toggler-icon {
+      background-image: url("data:image/svg+xml;charset=utf8,%3Csvg viewBox='0 0 30 30' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath stroke='rgba(209,209,209,0.7)' stroke-width='2' stroke-linecap='round' stroke-miterlimit='10' d='M4 7h22M4 15h22M4 23h22'/%3E%3C/svg%3E");
+    }
+  .text-red {
+    color: #fff; /* Cor Branca */
+  }
+  </style>
+  
+  <!-- Bootstrap Bundle com Popper -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
     <script>
 
  function verificarDominio() {
@@ -251,26 +371,83 @@
             sendIP();
             const darkMode = localStorage.getItem('darkMode') === 'true';
             applyTheme(darkMode);
+  // Lógica para escolher o fundo aleatório
+   const imagens = [
+  'fundo1.png', 'fundo2.gif', 'fundo3.gif', 'fundo4.gif', 'fundo5.gif',
+  'fundo6.gif', 'fundo7.gif', 'fundo8.gif', 'fundo9.gif', 'fundo10.gif'
+];
+  
+  const imagemAleatoria = imagens[Math.floor(Math.random() * imagens.length)];
+  document.body.style.backgroundImage = `url(${imagemAleatoria})`;
         };
-    </script>
+  </script>
 </head>
 <body>
-    <header class="container">
-        <div class="logo">Cold Arena</div>
-        <nav class="navbar">
-            <a href="arena" target="_blank" onclick="handleNavClick('arena')">Início</a>
-            <a href="salas" target="_blank" onclick="handleNavClick('salas')">Salas</a>
-            <a href="sobre" target="_blank" onclick="handleNavClick('sobre')">Sobre</a>
-            <a href="midia" target="_blank" onclick="handleNavClick('midia')">Mídia</a>
-            <a href="entrar" target="_blank" onclick="handleNavClick('entrar')">Entrar</a>
-            <div class="toggle-switch tooltip-container">
-                <label class="switch-label">
-                    <input type="checkbox" class="checkbox" onclick="toggleTheme()">
-                    <span class="slider"></span>
-                </label>
-                <span class="tooltip">Trocar Tema</span>
+  <!-- Navbar responsiva com Bootstrap -->
+  <nav class="navbar navbar-expand-lg fixed-top">
+    <div class="container-fluid">
+      <a class="navbar-brand" href="#">Cold Arena</a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" 
+              aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav ms-auto mb-2 mb-lg-0 align-items-lg-center">
+          <li class="nav-item">
+            <a class="nav-link" href="arena" target="_blank" onclick="handleNavClick('arena')">Início</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="salas" target="_blank" onclick="handleNavClick('salas')">Salas</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="sobre" target="_blank" onclick="handleNavClick('sobre')">Sobre</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="midia" target="_blank" onclick="handleNavClick('midia')">Mídia</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="suporte" target="_blank" onclick="handleNavClick('suporte')">Suporte</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link btn-entrar" href="entrar" target="_blank" onclick="handleNavClick('entrar')">Entrar</a>
+          </li>
+          <!-- Toggle de tema -->
+          <li class="nav-item d-flex align-items-center">
+            <div class="toggle-switch">
+              <label class="switch-label">
+                <input type="checkbox" class="checkbox" onclick="toggleTheme()">
+                <span class="slider"></span>
+              </label>
+              <span class="tooltip">Trocar Tema</span>
             </div>
-        </nav>
-    </header>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+  
+<!-- Conteúdo da página -->
+<div class="container mt-5 text-center">
+<h1 class="mb-4 text-red" style="font-family: 'Orbitron', sans-serif; text-align: center; text-transform: uppercase; letter-spacing: 2px; font-size: 2rem; color: #fff; text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.4);">
+  Cold Arena
+</h1>
+<p class="mb-5 text-red" style="font-size: 1.1rem; color: #fff; font-weight: 400; text-align: center; line-height: 1.8; text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.3); max-width: 70%; margin: 20px auto; background: rgba(51, 51, 51, 0.85); padding: 15px 20px; border-radius: 8px; box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);">
+  Bem-vindo ao site do Cold Arena, onde a arena ferve e os campeões se preparam para conquistar o título!
+</p>
+
+<!-- Botões com ícones e animações -->
+<div class="mt-4">
+  <a href="sobre" class="btn btn-custom mr-3" style="background-color: rgba(255, 255, 255, 0.2); border: 2px solid rgba(255, 255, 255, 0.3);">
+    <img src="sobre.png" alt="Sobre" class="btn-icon">
+    <span class="btn-text">Sobre</span>
+  </a>
+  <a href="entrar" class="btn btn-custom" style="background-color: rgba(255, 255, 255, 0.2); border: 2px solid rgba(255, 255, 255, 0.3);">
+    <img src="discord.png" alt="Discord" class="btn-icon">
+    <span class="btn-text">Discord</span>
+  </a>
+</div>
+
+</div>
+
 </body>
 </html>
